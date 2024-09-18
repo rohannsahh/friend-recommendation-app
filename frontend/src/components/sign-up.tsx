@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Eye, EyeOff, X } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const interests = [
   "Technology", "Sports", "Music", "Art", "Travel", 
@@ -19,6 +20,7 @@ export function SignUpComponent() {
   const [showPassword, setShowPassword] = useState(false)
   const [selectedInterests, setSelectedInterests] = useState<string[]>([])
  const navigate = useNavigate();
+ const [error, setError] = useState<string | null>(null);
   const handleInterestToggle = (interest: string) => {
     if (selectedInterests.includes(interest)) {
       setSelectedInterests(selectedInterests.filter(i => i !== interest))
@@ -27,11 +29,30 @@ export function SignUpComponent() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log({ username, email, password, interests: selectedInterests })
-    navigate('/login');
+    
+    setError(null)
+    // console.log({ username, email, password, interests: selectedInterests })
+
+    const formData={
+      username, 
+      email,
+      password,
+      interests:selectedInterests,
+    };
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/signup",formData);
+
+      if(response.status===201){
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('signup error',error);
+      setError('Something went wrong')
+    }
+
   }
 
   return (
@@ -111,6 +132,7 @@ export function SignUpComponent() {
           <div className="text-sm text-gray-500">
             Selected: {selectedInterests.length}/5
           </div>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
         </form>
       </CardContent>
       <CardFooter>
