@@ -1,10 +1,13 @@
-import express from 'express';
+import express, { NextFunction ,Request,Response} from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import User from './models/user';
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv';
 import jwt from "jsonwebtoken"
+import type { JwtPayload } from "jsonwebtoken"
+
+
 dotenv.config();
 
 const app =express();
@@ -43,44 +46,6 @@ app.post('/api/signup', async (req,res)=>{
 });
 
 
-// // Middleware to check if the request has a valid token
-// function authenticateToken(req:any, res:any , next:any) {
-//   const token = req.headers['authorization']?.split(' ')[1];
-
-//   if (!token) {
-//     return res.status(401).json({ message: 'Access denied. No token provided.' });
-//   }
-
-//   try {
-//     const decoded = jwt.verify(token, secret);
-//     req.user = decoded; // Save user data from token to request object
-//     next(); // Proceed to the next middleware/route handler
-//   } catch (err) {
-//     return res.status(403).json({ message: 'Invalid token' });
-//   }
-// }
-
-// // Protected route using the middleware
-// app.get('/api/dashboard', authenticateToken, (req, res) => {
-//   res.json({ message: 'Welcome to the dashboard'});
-// });
-
-
-app.get('/api/protectedroute', async (req, res) => {
-    const token = req.headers.authorization?.split(' ')[1]; // Extract the token from 'Bearer <token>'
-
-    if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
-    }
-
-    try {
-        const decoded = jwt.verify(token, secret);
-        // Token is valid, proceed with your logic
-        res.status(200).json({ message: 'Access granted' });
-    } catch (err) {
-        return res.status(403).json({ message: 'Invalid or expired token' });
-    }
-});
 
 app.post('/api/login', async (req,res)=>{
     try {
@@ -101,6 +66,34 @@ app.post('/api/login', async (req,res)=>{
     }
  
 })
+
+function authMiddleware(req:Request,res:Response,next:NextFunction){
+    const authHeader= req.headers['authorization'];
+    const token = authHeader?.split(' ')[1] || '';
+
+    if(!token){
+       return res.status(401).json({message:'no token found'})
+    }
+    try {
+        const decoded = jwt.verify(token , secret) ;
+        
+  if (typeof decoded === 'object' && 'userId' in decoded) {
+    req.user = { userId: (decoded as JwtPayload).userId };
+  } else {
+    return res.status(400).json({ message: 'Invalid token structure' });
+  }    
+      next();
+    } catch (error) {
+       return res.status(401).json({message:' token not valid'})
+    }
+}
+
+
+app.get('/api/protectedroute',authMiddleware, async (req, res) => {
+    return  res.status(200).json({ message: 'Access granted' });
+ 
+ });
+
 
 const PORT = process.env.port || 5000;
 app.listen(PORT,()=>{
