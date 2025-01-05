@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     // Define an async function inside useEffect
     const verifyToken = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/protectedroute", {
+        const response = await axios.get("http://localhost:5000/api/auth/protectedroute", {
           headers: {
             Authorization: `Bearer ${token}`, // Use the token stored in localStorage
           },
