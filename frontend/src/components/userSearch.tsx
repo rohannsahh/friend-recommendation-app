@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 
@@ -6,7 +7,6 @@ import { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { searchUsers } from '../services/userService'
 import axios from "axios"
 import { Loader2, UserPlus } from 'lucide-react'
 
@@ -30,12 +30,26 @@ export function UserSearch() {
       const token = localStorage.getItem('authToken')
       const data = await searchUsers(query, token)
       setResults(data)
+      
     } catch {
       setError('Failed to fetch search results.')
     } finally {
       setLoading(false)
     }
   }
+   const searchUsers = async (query: any, token: any) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/api/users/search?query=${query}`, {
+            headers: {
+                Authorization: `Bearer ${token}`, 
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error searching users:', error);
+        throw error;
+    }
+};
 
   const handleSendRequest = async (recipientId: string) => {
     const token = localStorage.getItem('authToken')

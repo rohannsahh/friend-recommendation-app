@@ -10,7 +10,6 @@ const router = Router();
 
 
 
-// Get the list of friends for the authenticated user
 router.get('/list', authMiddleware, async (req, res) => {
     try {
         if (!req.user) {
@@ -99,7 +98,7 @@ router.post('/request', authMiddleware, async (req, res) => {
         return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const { userId } = req.user; // Authenticated user
+    const { userId } = req.user; 
     const { recipientId } = req.body;
 
     try {
@@ -125,7 +124,6 @@ router.post('/request', authMiddleware, async (req, res) => {
             return res.status(400).json({ error: "Friend request already sent and pending." });
         }
 
-        // Add the request
         recipient.friendRequests.push(new mongoose.Types.ObjectId(userId));
         await recipient.save();
 
@@ -141,15 +139,13 @@ router.get('/requests', authMiddleware, async (req, res) => {
         return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const { userId } = req.user; // Authenticated user
+    const { userId } = req.user;
     try {
-        // Find the user and populate friend requests
         const user = await User.findById(userId).populate('friendRequests', 'username email');
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Return the populated friend requests
         res.status(200).json(user.friendRequests);
     } catch (error) {
         console.error('Error fetching friend requests:', error);
@@ -163,8 +159,8 @@ router.post('/respond',authMiddleware, async (req, res) => {
     if (!req.user) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
-    const { userId } = req.user; // Authenticated user
-    const { senderId, action } = req.body; // action: 'accept' or 'reject'
+    const { userId } = req.user; 
+    const { senderId, action } = req.body;
 
     try {
         const user = await User.findById(userId);
@@ -174,18 +170,15 @@ router.post('/respond',authMiddleware, async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Check if the request exists
         if (!user.friendRequests.includes(senderId)) {
             return res.status(400).json({ error: 'No friend request found' });
         }
 
-        // Handle action
         if (action === 'accept') {
             user.friends.push(senderId);
             sender.friends.push(new mongoose.Types.ObjectId(userId));
         }
 
-        // Remove the request
         user.friendRequests = user.friendRequests.filter(
             (id) => id.toString() !== senderId
         );
@@ -200,13 +193,12 @@ router.post('/respond',authMiddleware, async (req, res) => {
 
 
 
-// Get Friend Suggestions
 router.get('/suggestions', authMiddleware, async (req, res) => {
     if (!req.user) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const { userId } = req.user; // Authenticated user
+    const { userId } = req.user;
 
     try {
         // Fetch the current user and their friends

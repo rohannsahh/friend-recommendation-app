@@ -6,7 +6,7 @@ interface IUser extends Document {
     password: string;
     interests?: string[];
     friends: Types.ObjectId[];
-    friendRequests: Types.ObjectId[]; // Field for storing pending friend requests
+    friendRequests: Types.ObjectId[];
 }
 
 const UserSchema: Schema<IUser> = new mongoose.Schema({
@@ -14,8 +14,8 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     interests: { type: [String], default: [] },
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Friend list
-    friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Pending friend requests
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
+    friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 const User = mongoose.model<IUser>('User', UserSchema);

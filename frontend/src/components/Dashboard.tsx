@@ -1,34 +1,4 @@
 
-
-
-// import UserSearch from './userSearch';
-// import FriendRequests from './friendRequests';
-// import FriendsList from './friendList';
-// import FriendSuggestions from './friendSuggestions';
-
-// const Dashboard = () => {
-//     return (
-//         <div className="flex flex-row justify-around min-h-screen bg-gray-50">
-//             <div>
-//                 <h2>Friends List</h2>
-//                 <FriendsList/>
-//             </div>
-//             <div>
-//                 <h1>FriendsBook</h1>
-//                 <UserSearch />
-//                 <FriendRequests />
-//             </div>
-//             <aside>
-//                  <FriendSuggestions /> 
-//             </aside>
-//         </div>
-//     );
-// };
-
-// export default Dashboard;
-
-
-
 import { UserSearch } from './userSearch'
 import { FriendRequests } from './friendRequests'
 import { FriendsList } from './friendList'
@@ -53,6 +23,7 @@ export function Dashboard() {
         </div>
       </div>
     </main>
+    
     </div>
   )
 }
