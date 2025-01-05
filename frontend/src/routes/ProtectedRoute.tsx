@@ -5,11 +5,11 @@ import axios from "axios";
 interface ProtectedRouteProps {
   children: JSX.Element;
 }
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useState(false); 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");

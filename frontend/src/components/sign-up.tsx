@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Eye, EyeOff, X } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const interests = [
   "Technology", "Sports", "Music", "Art", "Travel", 
@@ -28,7 +29,6 @@ export function SignUpComponent() {
       setSelectedInterests([...selectedInterests, interest])
     }
   }
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

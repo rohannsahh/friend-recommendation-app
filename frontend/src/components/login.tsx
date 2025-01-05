@@ -7,6 +7,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export function LoginComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +21,6 @@ export function LoginComponent() {
     e.preventDefault();
     setError(null); 
     setLoading(true); 
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const formData = {
       email,

@@ -13,7 +13,9 @@ import friendRoutes from './routes/friendRoutes';
 const app =express();
 
 
-app.use(cors()); 
+app.use(cors({  origin: 'https://friend-recommendation-app.vercel.app',}
+  
+)); 
 app.use(express.json())
 
 
