@@ -19,6 +19,7 @@ export function LoginComponent() {
     e.preventDefault();
     setError(null); 
     setLoading(true); 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const formData = {
       email,
@@ -26,7 +27,7 @@ export function LoginComponent() {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", formData);
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
       
       const { token } = response.data;
 

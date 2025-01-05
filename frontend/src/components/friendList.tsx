@@ -48,7 +48,7 @@ export function FriendsList() {
     try {
       const token = localStorage.getItem("authToken")
 
-      await axios.delete(`http://localhost:5000/api/friends/${friendId}`, {
+      await axios.delete(`${API_BASE_URL}/api/friends/${friendId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
