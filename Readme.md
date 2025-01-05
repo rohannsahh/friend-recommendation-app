@@ -4,7 +4,7 @@ Took around 5 hr 20 mins to build (source wakatime)
   
 Live url:https://friend-recommendation-app.vercel.app/  
 Github url: https://github.com/rohannsahh/friend-recommendation-app  
-project demonstartion: 
+project demonstartion: https://drive.google.com/file/d/1M6gMcWe8nBekyS7eYeQBFieEN_s-iQkd/view?usp=sharing
 
 # Technologies:  
   
