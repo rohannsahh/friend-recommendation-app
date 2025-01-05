@@ -1,9 +1,10 @@
 import { Router } from "express";
 import User from "../models/user";
+import authMiddleware from "../middleware/authMiddleware";
 
 
 const router = Router();
-router.get('/search', async (req, res) => {
+router.get('/search', authMiddleware, async (req, res) => {
     const { query } = req.query;
     try {
         const users = await User.find({ username: { $regex: query, $options: 'i' } });

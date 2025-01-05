@@ -2,7 +2,7 @@ import { BrowserRouter as Router ,Routes,Route, Navigate } from 'react-router-do
 import { SignUpComponent } from '../components/sign-up'
 import { LoginComponent } from '../components/login'
 import ProtectedRoute from './ProtectedRoute';
-import Dashboard from '@/components/Dashboard';
+import {Dashboard} from '@/components/Dashboard';
 
 const AppRoutes = () => {
   return (

@@ -6,6 +6,7 @@ import { DBconnection } from './config/db';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
+import friendRoutes from './routes/friendRoutes';
 
 
 
@@ -24,6 +25,7 @@ DBconnection();
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/friends', friendRoutes);
 
 
 const PORT = process.env.port || 5000;
