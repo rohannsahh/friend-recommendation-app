@@ -9,6 +9,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useState(false); 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -20,7 +21,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
     const verifyToken = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/protectedroute", {
+        const response = await axios.get(`${API_BASE_URL}/api/auth/protectedroute`, {
           headers: {
             Authorization: `Bearer ${token}`, 
           },

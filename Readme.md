@@ -1,17 +1,19 @@
-// Internship Assignment Submission of Tutedude  
+## Internship Assignment Submission of Tutedude  
   
-Took around 5 hr 20 mins to build (source wakatime)  
+Took around 5 hr 20 mins to build (source wakatime)    
+  
 Live url:https://friend-recommendation-app.vercel.app/  
 Github url: https://github.com/rohannsahh/friend-recommendation-app  
-    
-// Technologies:  
+project demonstartion: 
+
+# Technologies:  
   
 forntend: React , typescript , talwind css , shadcn   
 Backend: express js ,nodejs , typescript  
 Database: Mongodb atlas  
 Deploy: vercel (frontend ), Railway(Backend)    
   
-// All requirements mentioned in assignment properly and fully implemented  
+# All requirements mentioned in assignment properly and fully implemented  
 1. user authentication with protected route  
 2. Home page with friend recommendation based on mutuals and interests , friend list with option to unfriend , and user search functionality to search && add friends.    
 3. Add Friend Feature    
@@ -20,7 +22,7 @@ Deploy: vercel (frontend ), Railway(Backend)
     Accept/Reject Requests    
 4. Friend Recommendation System    
   
-// Steps to run project locally  
+# Steps to run project locally  
   
 1. git clone https://github.com/rohannsahh/friend-recommendation-app  
 2. cd frontend   
@@ -29,7 +31,7 @@ Deploy: vercel (frontend ), Railway(Backend)
 5. npm i     
 6. populate envs  
   
-// About me -  
+## About me -  
   
 Rohan Kumar | rohannsahh@gmail.com | 9354291342  
   
