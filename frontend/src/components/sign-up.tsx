@@ -55,7 +55,7 @@ export function SignUpComponent() {
     }
 
   }
-  console.log(API_BASE_URL);
+  console.log(import.meta.env.VITE_API_BASE_URL);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
