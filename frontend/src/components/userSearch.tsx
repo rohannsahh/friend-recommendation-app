@@ -30,7 +30,7 @@ export function UserSearch() {
       const token = localStorage.getItem('authToken')
       const data = await searchUsers(query, token)
       setResults(data)
-      
+      setQuery('')
     } catch {
       setError('Failed to fetch search results.')
     } finally {

@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      { "source": "/signup", "destination": "/" },
+      { "source": "/login", "destination": "/" },
+      { "source": "/dashboard", "destination": "/" },
+      { "source": "/api/:path*", "destination": "/api/:path*" }
+    ]
+  }
+  
